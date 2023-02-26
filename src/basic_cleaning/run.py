@@ -21,7 +21,8 @@ def go(args):
     df = pd.read_csv(local_path)
 
     logger.info("Dropping outliers for longitude and latitude")
-    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    idx = df['longitude'].between(-74.25, -
+                                  73.50) & df['latitude'].between(40.5, 41.2)
     df = df[idx].copy()
 
     logger.info("Dropping outliers for price column")
@@ -44,53 +45,52 @@ def go(args):
     run.log_artifact(artifact)
     run.finish()
 
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="A very basic cleaning")
 
-
     parser.add_argument(
-        "--input_artifact", 
+        "--input_artifact",
         type=str,
         help="Fully-qualified name for the input artifact",
         required=True
     )
 
     parser.add_argument(
-        "--output_artifact", 
+        "--output_artifact",
         type=str,
         help="output artifact name",
         required=True
     )
 
     parser.add_argument(
-        "--output_type", 
+        "--output_type",
         type=str,
         help="output artifact type",
         required=True
     )
 
     parser.add_argument(
-        "--output_description", 
+        "--output_description",
         type=str,
         help="Description of output artifact",
         required=True
     )
 
     parser.add_argument(
-        "--min_price", 
+        "--min_price",
         type=float,
         help="Minimum value of price",
         required=True
     )
 
     parser.add_argument(
-        "--max_price", 
+        "--max_price",
         type=float,
         help="Maximum value of price",
         required=True
     )
-
 
     args = parser.parse_args()
 
